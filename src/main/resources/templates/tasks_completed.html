@@ -6,18 +6,13 @@
 <body>
 	<h1>Epic Task</h1>
 
-	<nav th:include="_template :: menu('task')"></nav>
-
-	<a href="/task/new" class="btn-sm btn-primary"> 
-		<span class="material-icons">add</span>
-	</a>
-
+	<nav th:include="_template :: menu('task_completed')"></nav>
 
 	<div class="content">
 		<span class="alert" th:if="${message != null}" th:text="${message}"></span>
 		
 		<div class="tasks">
-			<div th:each="task : ${tasks}" class="card-task">
+			<div th:each="task : ${tasksCompleted}" class="card-task">
 				
 				<span th:object="${task.user}">
 					<img 
@@ -64,6 +59,26 @@
 			</div>
 				
 		</div>
+		
+	<div>
+	<a th:if="${!tasksCompleted.first}" 
+		th:href="@{/task/completed(page=${tasksCompleted.number-1} , size=${tasksCompleted.size})}" th:text="#{form.label.anterior}"></a>
+	<span th:text="${(tasksCompleted.number+1) + ' de ' + tasksCompleted.totalPages}"></span>
+	<a th:if="${!tasksCompleted.last}" 
+		th:href="@{/task/completed(page=${tasksCompleted.number+1} , size=${tasksCompleted.size})}" th:text="#{form.label.proxima}"></a>
+	</div>
+	
+	<div>
+		<details>
+			<summary th:text="#{form.label.paginacao}"> </summary>
+			<ul>
+				<li><a th:href="@{/task/completed(page=${tasksCompleted.number} , size=5 )}" th:text="#{form.label.cincoUsuariosPagina}"></a></li>
+				<li><a th:href="@{/task/completed(page=${tasksCompleted.number} , size=10 )}" th:text="#{form.label.dezUsuariosPagina}"></a></li>
+				<li><a th:href="@{/task/completed(page=${tasksCompleted.number} , size=20 )}" th:text="#{form.label.vinteUsuariosPagina}"></a></li>
+			</ul>
+		</details>
+	</div>
+	
 	</div>
 	
 </body>

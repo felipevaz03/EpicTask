@@ -6,11 +6,7 @@
 <body>
 	<h1>Epic Task</h1>
 	
-	<nav th:include="_template :: menu('team')"></nav>
-	
-	<a href="/user/new" class="btn-sm btn-primary">
-		<span class="material-icons">add</span>
-	</a>
+	<nav th:include="_template :: menu('user_ranking')"></nav>
 	
 <div class="content">
 
@@ -23,14 +19,6 @@
 			<p th:text="${user.email}"></p>
 			<p th:text="${user.point}"></p>
 		</div>
-		<div class="user-action">
-			<a th:href="${'/user/' + user.id }">
-				<span class="material-icons yellow">create</span>
-			</a>
-			<a th:href="${'/user/delete/' + user.id }">
-				<span class="material-icons red" >delete</span>
-			</a>
-		</div>
 	</div>
 	
 	<div>
@@ -42,13 +30,6 @@
 	</div>
 	
 	<div>
-		<details>
-			<summary th:text="#{form.label.ordenacao}"> </summary>
-			<ul>
-				<li><a th:href="@{/user(page=${users.number} , size=${users.size} , sort='name' )}" th:text="#{form.label.name}"></a></li>
-				<li><a th:href="@{/user(page=${users.number} , size=${users.size} , sort='point,DESC' )}" th:text="#{form.label.point}"></a></li>
-			</ul>
-		</details>
 		<details>
 			<summary th:text="#{form.label.paginacao}"> </summary>
 			<ul>
